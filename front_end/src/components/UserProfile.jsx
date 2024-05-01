@@ -4,6 +4,7 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import SettingsIcon from '@mui/icons-material/Settings';
 import PersonIcon from '@mui/icons-material/Person';
+import DashboardUser from './DashboardUser';
 
 function UserProfile() {
     const [user, setUser] = useState({
@@ -17,6 +18,7 @@ function UserProfile() {
     });
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState('');
+    const [view, setView] = useState('profile'); // Can be 'profile' or 'dashboard'
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -26,21 +28,13 @@ function UserProfile() {
         }));
     };
 
-    const validateForm = () => {
+    const handleSubmit = (event) => {
+        event.preventDefault();
         if (user.newPassword !== user.confirmPassword) {
             setMessage('Passwords do not match');
-            return false;
-        }
-        return true;
-    };
-
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        if (!validateForm()) {
             return;
         }
         setLoading(true);
-        // Simulate API call
         setTimeout(() => {
             setLoading(false);
             setMessage('Profile and Password Updated Successfully!');
@@ -50,41 +44,28 @@ function UserProfile() {
     return (
         <Box sx={{ display: 'flex', height: '100vh', p: 2 }}>
             <Box sx={{ width: '25%', bgcolor: 'background.paper' }}>
-                <Typography variant="h6" sx={{ my: 2, ml: 2 }}>
-                    Profile Options
-                </Typography>
                 <List component="nav" aria-label="mailbox folders">
-                    <ListItem button>
-                        <ListItemIcon>
-                            <DashboardIcon />
-                        </ListItemIcon>
+                    <ListItem button onClick={() => setView('dashboard')}>
+                        <ListItemIcon><DashboardIcon /></ListItemIcon>
                         <ListItemText primary="Dashboard" />
                     </ListItem>
-                    <ListItem button>
-                        <ListItemIcon>
-                            <NotificationsIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Notifications" />
-                    </ListItem>
-                    <ListItem button>
-                        <ListItemIcon>
-                            <SettingsIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Settings" />
-                    </ListItem>
-                    <Divider light />
-                    <ListItem button>
-                        <ListItemIcon>
-                            <PersonIcon />
-                        </ListItemIcon>
+                    <ListItem button onClick={() => setView('profile')}>
+                        <ListItemIcon><PersonIcon /></ListItemIcon>
                         <ListItemText primary="Profile Settings" />
                     </ListItem>
+                    <ListItem button >
+                        <ListItemIcon><NotificationsIcon /></ListItemIcon>
+                        <ListItemText primary="notifications" />
+                    </ListItem>
+                    {/* Additional navigation items */}
                 </List>
             </Box>
             <Paper elevation={3} sx={{ width: '75%', p: 3, overflow: 'auto' }}>
-                <Typography variant="h5" sx={{ mb: 2 }}>Account Information</Typography>
-                {message && <Typography color="primary" sx={{ mb: 2 }}>{message}</Typography>}
-                <form onSubmit={handleSubmit}>
+                {view === 'profile' ? (
+                    <>
+                        <Typography variant="h5" sx={{ mb: 2 }}>Account Information</Typography>
+                        {message && <Typography color="primary" sx={{ mb: 2 }}>{message}</Typography>}
+                        <form onSubmit={handleSubmit}>
                     {/* Form Fields */}
                     <TextField fullWidth label="First name" variant="outlined" name="firstName" value={user.firstName} onChange={handleChange} sx={{ mb: 2 }} />
                     <TextField fullWidth label="Last name" variant="outlined" name="lastName" value={user.lastName} onChange={handleChange} sx={{ mb: 2 }} />
@@ -97,8 +78,21 @@ function UserProfile() {
                         {loading ? <CircularProgress size={24} color="inherit" /> : 'Update Profile'}
                     </Button>
                 </form>
+                    </>
+                ) : (
+                    <DashboardUser/>
+                )}
             </Paper>
         </Box>
+    );
+}
+
+function Dashboard() {
+    return (
+        <div>
+            <Typography variant="h4" gutterBottom>Dashboard</Typography>
+            <Typography>This is your dashboard. Add widgets and charts here.</Typography>
+        </div>
     );
 }
 
