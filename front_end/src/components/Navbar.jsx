@@ -11,6 +11,10 @@ export default function Navbar() {
     function navigateContact(){
         navigate('/contact')
         }
+
+        function navigateAboutUs(){
+            navigate('/about-us')
+            }
     return (
         <header className="bg-white py-4 shadow-md">
             <div className="container mx-auto px-4 flex justify-between items-center">
@@ -20,7 +24,7 @@ export default function Navbar() {
                 <nav>
                     <ul className="flex items-center space-x-4">
                         <li><a href="#" className="text-gray-600 hover:text-gray-800 transition duration-200 ease-in-out">How it works</a></li>
-                        <li><a href="#" className="text-gray-600 hover:text-gray-800 transition duration-200 ease-in-out">Rent Your Space</a></li>
+                        <li><a href="#" className="text-gray-600 hover:text-gray-800 transition duration-200 ease-in-out" onClick={navigateAboutUs}>About Us</a></li>
                         <li><a href="#" className="text-gray-600 hover:text-gray-800 transition duration-200 ease-in-out" onClick={navigateContact}>Contact Us</a></li>
                         <li><a href="#" className="text-gray-600 hover:text-gray-800 transition duration-200 ease-in-out">Help</a></li>
 
