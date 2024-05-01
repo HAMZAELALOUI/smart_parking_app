@@ -1,9 +1,8 @@
 import React from 'react';
-import { Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, IconButton } from '@mui/material';
+import { Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, Collapse, Box } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Collapse from '@mui/material/Collapse';
-import Box from '@mui/material/Box';
+import { visuallyHidden } from '@mui/utils';
 
 function createData(name, date, price, details) {
   return {
@@ -40,14 +39,14 @@ export default function DashboardUser() {
     <div style={{ margin: 20 }}>
       <Typography variant="h4" gutterBottom>Dashboard</Typography>
       <Typography variant="h6" gutterBottom>Manage Your Reservations</Typography>
-      <TableContainer component={Paper}>
-        <Table>
+      <TableContainer component={Paper} elevation={3}>
+        <Table aria-label="collapsible table">
           <TableHead>
             <TableRow>
               <TableCell>Date</TableCell>
               <TableCell>Reservation</TableCell>
               <TableCell>Price</TableCell>
-              <TableCell>Details</TableCell>
+              <TableCell>Expand</TableCell>
               <TableCell>Delete</TableCell>
             </TableRow>
           </TableHead>
@@ -55,7 +54,9 @@ export default function DashboardUser() {
             {rows.map((row) => (
               <React.Fragment key={row.name}>
                 <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
-                  <TableCell>{row.date}</TableCell>
+                  <TableCell component="th" scope="row">
+                    {row.date}
+                  </TableCell>
                   <TableCell>{row.name}</TableCell>
                   <TableCell>{row.price}</TableCell>
                   <TableCell>
@@ -63,6 +64,8 @@ export default function DashboardUser() {
                       aria-label="expand row"
                       size="small"
                       onClick={() => handleExpandClick(row)}
+                      aria-expanded={row.isExpanded}
+                      aria-controls={`panel-${row.name}-content`}
                     >
                       <ExpandMoreIcon />
                     </IconButton>
@@ -74,17 +77,43 @@ export default function DashboardUser() {
                   </TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-                    <Collapse in={row.isExpanded} timeout="auto" unmountOnExit>
-                      <Box margin={1}>
-                        <Typography variant="h6" gutterBottom component="div">
-                          Reservation Details
-                        </Typography>
-                        <Typography variant="body2">{row.details}</Typography>
-                      </Box>
-                    </Collapse>
-                  </TableCell>
-                </TableRow>
+  <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={5}>
+    <Collapse in={row.isExpanded} timeout="auto" unmountOnExit>
+      <Box sx={{
+        margin: 1,
+        padding: 2,
+        border: '1px solid #ccc',
+        boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+        borderRadius: '8px',
+        backgroundColor: 'white',
+        transition: 'box-shadow 0.3s ease-in-out'
+      }}>
+        <Typography variant="h6" gutterBottom component="div" sx={{
+          borderBottom: '2px solid #4a148c',
+          padding: '12px 16px',
+          backgroundColor: '#f3e5f5',
+          borderRadius: '7px 7px 0 0',
+          fontWeight: 'bold',
+          color: '#4a148c'
+        }}>
+          Detailed Reservation Information
+        </Typography>
+        <Box sx={{ padding: '16px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          <Typography variant="subtitle1" sx={{ color: '#333' }}>
+            Date of Reservation: <strong>{row.date}</strong>
+          </Typography>
+          <Typography variant="subtitle1" sx={{ color: '#333' }}>
+            Total Price: <strong>{row.price}</strong>
+          </Typography>
+          <Typography variant="body1" sx={{ color: '#666' }}>
+            {row.details}
+          </Typography>
+        </Box>
+      </Box>
+    </Collapse>
+  </TableCell>
+</TableRow>
+
               </React.Fragment>
             ))}
           </TableBody>
