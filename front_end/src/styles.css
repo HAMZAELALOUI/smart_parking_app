@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.payment-method {
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.payment-method:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.selected {
+  border-color: #007bff; /* Bootstrap primary color */
+}
