@@ -1,51 +1,64 @@
-// src/components/CustomTimeline.jsx
 import React from 'react';
 import { Timeline, TimelineItem, TimelineSeparator, TimelineConnector, TimelineContent, TimelineDot } from '@mui/lab';
-import { Typography, Paper } from '@mui/material';
-import { School, Work, StarBorder } from '@mui/icons-material';
+import { Typography, Paper, Avatar } from '@mui/material';
+import { Person } from '@mui/icons-material';
 
 function CustomTimeline() {
-  const timelineEvents = [
+  const teamMembers = [
     {
-      time: '2009 - 2013',
-      title: 'High School Diploma',
-      description: 'Completed with high marks in science and mathematics.',
-      icon: <School />
+      name: 'Morad El Maslouhy',
+      role: 'Project Manager',
+      description: 'Leads project planning, scheduling, and management activities.',
+      initials: 'MM'
     },
     {
-      time: '2014 - 2018',
-      title: 'B.Sc. in Computer Science',
-      description: 'Graduated from ABC University with a focus on software engineering.',
-      icon: <Work />
+      name: 'Hamza El Aloui',
+      role: 'Lead Developer',
+      description: 'Focuses on backend development and system integration.',
+      initials: 'HE'
     },
     {
-      time: '2019 - Present',
-      title: 'Software Engineer at XYZ Corp',
-      description: 'Working on multiple high-profile projects, focusing on web development and cloud solutions.',
-      icon: <StarBorder />
+      name: 'Zakariae Lagraini',
+      role: 'UI/UX Designer',
+      description: 'Designs and develops the user interface and user experience.',
+      initials: 'ZL'
+    },
+    {
+      name: 'Reda Jord',
+      role: 'Quality Assurance Engineer',
+      description: 'Ensures all round quality and performance of the software.',
+      initials: 'RJ'
+    },
+    {
+      name: 'Ikram Souita',
+      role: 'Software Developer',
+      description: 'Works on frontend development and feature implementation.',
+      initials: 'IS'
     }
   ];
 
   return (
     <Paper elevation={3} sx={{ p: 2, m: 2 }}>
       <Typography variant="h5" gutterBottom component="div">
-        Career Timeline
+        Development Team
       </Typography>
       <Timeline position="alternate">
-        {timelineEvents.map((event, index) => (
+        {teamMembers.map((member, index) => (
           <TimelineItem key={index}>
             <TimelineSeparator>
               <TimelineDot color="primary" variant="outlined">
-                {event.icon}
+                <Avatar sx={{ bgcolor: 'secondary.main' }}>{member.initials}</Avatar>
               </TimelineDot>
-              <TimelineConnector />
+              {index < teamMembers.length - 1 && <TimelineConnector />}
             </TimelineSeparator>
             <TimelineContent sx={{ py: '12px', px: 2 }}>
               <Typography variant="h6" component="span">
-                {event.title}
+                {member.name}
               </Typography>
-              <Typography>{event.time}</Typography>
-              <Typography color="textSecondary">{event.description}</Typography>
+              <Typography variant="body2" color="textSecondary">
+                {member.role}
+              </Typography>
+              <Typography color="textSecondary">{member.description}</Typography>
             </TimelineContent>
           </TimelineItem>
         ))}

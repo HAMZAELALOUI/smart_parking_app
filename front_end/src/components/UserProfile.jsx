@@ -70,7 +70,7 @@ function UserProfile() {
     const id = open ? 'simple-popover' : undefined;
 
     return (
-        <Box sx={{ display: 'flex', height: '100vh', p: 2 }}>
+        <Box sx={{ display: 'flex', height: '100vh', p: 2, mt: 9 }}>
             <Box sx={{ width: '25%', bgcolor: 'background.paper' }}>
                 <List component="nav" aria-label="mailbox folders">
                     <ListItem button onClick={() => setView('dashboard')}>
@@ -127,32 +127,31 @@ function UserProfile() {
                     </List>
                 </Popover>
             </Box>
-            <Paper elevation={
-3} sx={{ width: '75%', p: 3, overflow: 'auto' }}>
-{view === 'profile' ? (
-<>
-<Typography variant="h5" sx={{ mb: 2 }}>Account Information</Typography>
-{message && <Typography color="primary" sx={{ mb: 2 }}>{message}</Typography>}
-<form onSubmit={handleSubmit}>
-{/* Form Fields */}
-<TextField fullWidth label="First name" variant="outlined" name="firstName" value={user.firstName} onChange={handleChange} sx={{ mb: 2 }} />
-<TextField fullWidth label="Last name" variant="outlined" name="lastName" value={user.lastName} onChange={handleChange} sx={{ mb: 2 }} />
-<TextField fullWidth label="Phone number" variant="outlined" name="phone" value={user.phone} onChange={handleChange} sx={{ mb: 2 }} />
-<TextField fullWidth label="Email Address" variant="outlined" name="email" value={user.email} onChange={handleChange} sx={{ mb: 2 }} />
-<TextField fullWidth label="Current Password" type="password" variant="outlined" name="currentPassword" value={user.currentPassword} onChange={handleChange} sx={{ mb: 2 }} />
-<TextField fullWidth label="New Password" type="password" variant="outlined" name="newPassword" value={user.newPassword} onChange={handleChange} sx={{ mb: 2 }} />
-<TextField fullWidth label="Confirm New Password" type="password" variant="outlined" name="confirmPassword" value={user.confirmPassword} onChange={handleChange} sx={{ mb: 2 }} />
-<Button type="submit" variant="contained" fullWidth disabled={loading} sx={{ backgroundColor: '#4CAF50', '&:hover': { backgroundColor: '#45A049' }, color: 'white', '&.Mui-disabled': { backgroundColor: '#E0E0E0', color: '#9E9E9E' } }}>
-{loading ? <CircularProgress size={24} color="inherit" /> : 'Update Profile'}
-</Button>
-</form>
-</>
-) : (
-<DashboardUser/>
-)}
-</Paper>
-</Box>
-);
+            <Paper elevation={3} sx={{ width: '75%', p: 3, overflow: 'auto' }}>
+                {view === 'profile' ? (
+                    <>
+                        <Typography variant="h5" sx={{ mb: 2 }}>Account Information</Typography>
+                        {message && <Typography color="primary" sx={{ mb: 2 }}>{message}</Typography>}
+                        <form onSubmit={handleSubmit}>
+                            {/* Form Fields */}
+                            <TextField fullWidth label="First name" variant="outlined" name="firstName" value={user.firstName} onChange={handleChange} sx={{ mb: 2 }} />
+                            <TextField fullWidth label="Last name" variant="outlined" name="lastName" value={user.lastName} onChange={handleChange} sx={{ mb: 2 }} />
+                            <TextField fullWidth label="Phone number" variant="outlined" name="phone" value={user.phone} onChange={handleChange} sx={{ mb: 2 }} />
+                            <TextField fullWidth label="Email Address" variant="outlined" name="email" value={user.email} onChange={handleChange} sx={{ mb: 2 }} />
+                            <TextField fullWidth label="Current Password" type="password" variant="outlined" name="currentPassword" value={user.currentPassword} onChange={handleChange} sx={{ mb: 2 }} />
+                            <TextField fullWidth label="New Password" type="password" variant="outlined" name="newPassword" value={user.newPassword} onChange={handleChange} sx={{ mb: 2 }} />
+                            <TextField fullWidth label="Confirm New Password" type="password" variant="outlined" name="confirmPassword" value={user.confirmPassword} onChange={handleChange} sx={{ mb: 2 }} />
+                            <Button type="submit" variant="contained" fullWidth disabled={loading} sx={{ backgroundColor: '#4CAF50', '&:hover': { backgroundColor: '#45A049' }, color: 'white', '&.Mui-disabled': { backgroundColor: '#E0E0E0', color: '#9E9E9E' } }}>
+                                {loading ? <CircularProgress size={24} color="inherit" /> : 'Update Profile'}
+                            </Button>
+                        </form>
+                    </>
+                ) : (
+                    <DashboardUser/>
+                )}
+            </Paper>
+        </Box>
+    );
 }
 
 export default UserProfile;
