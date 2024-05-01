@@ -17,7 +17,7 @@ function AboutUs() {
   const matches = useMediaQuery(theme.breakpoints.up('md'));
 
   return (
-    <Box sx={{ overflow: 'hidden', px: 3, py: 5, bgcolor: 'background.default' }}>
+    <Box sx={{ overflow: 'hidden', px: 3, py: 5, bgcolor: 'background.default',mt:8 }}>
       <Typography variant="h2" gutterBottom component="h1" color="text.primary">
         We're JustPark, Your Smart Parking Solution
       </Typography>

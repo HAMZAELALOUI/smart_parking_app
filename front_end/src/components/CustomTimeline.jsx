@@ -6,16 +6,18 @@ import { Person } from '@mui/icons-material';
 function CustomTimeline() {
   const teamMembers = [
     {
-      name: 'Morad El Maslouhy',
+      name: 'Hamza El Aloui',
+
       role: 'Project Manager',
       description: 'Leads project planning, scheduling, and management activities.',
-      initials: 'MM'
+      initials: 'HE'
     },
     {
-      name: 'Hamza El Aloui',
+      name: 'Morad El Maslouhy',
+
       role: 'Lead Developer',
       description: 'Focuses on backend development and system integration.',
-      initials: 'HE'
+      initials: 'MM'
     },
     {
       name: 'Zakariae Lagraini',

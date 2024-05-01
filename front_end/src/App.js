@@ -17,6 +17,7 @@ import MapComponent from './components/MapComponent';
 import UserProfile from './components/UserProfile';
 import ContactForm from './components/ContactForm';
 import AboutUs from './components/AboutUs';
+import HelpSection from './components/HelpSection';
 
 function App() {
   const spots = [
@@ -50,6 +51,8 @@ function App() {
           <Route path="/user-profile" element={<UserProfile />} />
           <Route path="/contact" element={<ContactForm />} />
           <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/help" element={<HelpSection />} />
+
 
 
 

@@ -15,8 +15,11 @@ export default function Navbar() {
         function navigateAboutUs(){
             navigate('/about-us')
             }
+            function navigateHelp(){
+                navigate('/help')
+                }
     return (
-        <header className="bg-white py-4 shadow-md  fixed top-0 left-0 w-full z-50">
+        <header className="bg-white py-4 shadow-md  fixed top-0 left-0 w-full z-50 ">
             <div className="container mx-auto px-4 flex justify-between items-center">
                 <div className="logo">
                     <a onClick={handleIconeClick} href="#" className="font-bold text-xl text-green-600 hover:text-green-800">Emsi Park</a>
@@ -26,7 +29,7 @@ export default function Navbar() {
                         <li><a href="#" className="text-gray-600 hover:text-gray-800 transition duration-200 ease-in-out">How it works</a></li>
                         <li><a href="#" className="text-gray-600 hover:text-gray-800 transition duration-200 ease-in-out" onClick={navigateAboutUs}>About Us</a></li>
                         <li><a href="#" className="text-gray-600 hover:text-gray-800 transition duration-200 ease-in-out" onClick={navigateContact}>Contact Us</a></li>
-                        <li><a href="#" className="text-gray-600 hover:text-gray-800 transition duration-200 ease-in-out">Help</a></li>
+                        <li><a href="#" className="text-gray-600 hover:text-gray-800 transition duration-200 ease-in-out" onClick={navigateHelp}>Help</a></li>
 
                         {/* Login Button */}
                         <li>
