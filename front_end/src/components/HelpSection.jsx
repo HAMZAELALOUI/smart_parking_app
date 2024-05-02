@@ -33,7 +33,7 @@ function HelpSection() {
     };
 
     const handleSendMessage = async () => {
-      
+      //modified
     };
     
     
