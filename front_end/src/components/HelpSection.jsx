@@ -13,7 +13,6 @@ import CloseIcon from '@mui/icons-material/Close';
 import SendIcon from '@mui/icons-material/Send';
 
 function HelpSection() {
-
     const [openChat, setOpenChat] = useState(false);
     const [chatMessages, setChatMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
@@ -33,10 +32,8 @@ function HelpSection() {
     };
 
     const handleSendMessage = async () => {
-      //modified
+        // Code to send message here
     };
-    
-    
     
     const handleNewMessageChange = (event) => {
         setNewMessage(event.target.value);
@@ -73,7 +70,7 @@ function HelpSection() {
                         <ListItemIcon>
                             <PhoneIcon />
                         </ListItemIcon>
-                        <ListItemText primary="Call Us" secondary="+123 456 7890" />
+                        <ListItemText primary="Call Us" secondary={<a href="tel:+1234567890" style={{ textDecoration: 'none', color: 'inherit' }}>+123 456 7890</a>} />
                     </ListItem>
                     <ListItem button component="a" href="mailto:support@parkingapp.com">
                         <ListItemIcon>

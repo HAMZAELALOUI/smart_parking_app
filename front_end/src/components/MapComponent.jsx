@@ -101,8 +101,8 @@ const MapComponent = () => {
         </form>
         {message && <p style={{ color: '#28a745', marginTop: '10px' }}>{message}</p>}
       </div>
-      <div style={{ width: '70%' }}>
-        <MapContainer center={center} zoom={13} style={{ height: '100%', width: '100%' }}>
+      <div style={{ width: '70%' ,zIndex:10,height:'91%'}}>
+        <MapContainer center={center} zoom={13} style={{ height: '100%', width: '100%',marginTop: '60px' }}>
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
