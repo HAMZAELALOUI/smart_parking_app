@@ -14,6 +14,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import SendIcon from '@mui/icons-material/Send';
 
 function HelpSection() {
+
     const [openChat, setOpenChat] = useState(false);
     const [chatMessages, setChatMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
@@ -33,6 +34,7 @@ function HelpSection() {
         setOpenChat(false);
     };
 
+
     const handleSendMessage = () => {
         if (newMessage.trim()) {
             const now = new Date();
@@ -40,6 +42,10 @@ function HelpSection() {
             setChatMessages([...chatMessages, { text: newMessage, sender: 'You', time: timestamp }]);
             setNewMessage('');
         }
+
+    const handleSendMessage = async () => {
+      //
+
     };
 
     const handleNewMessageChange = (event) => {
@@ -143,6 +149,6 @@ function HelpSection() {
             </Dialog>
         </Box>
     );
-}
+}}
 
 export default HelpSection;
