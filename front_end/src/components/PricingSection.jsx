@@ -4,8 +4,12 @@ import EventIcon from '@mui/icons-material/Event'; // Weekly
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth'; // Monthly
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday'; // Yearly
 import { CheckCircleOutline } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 
 function PricingSection() {
+
+
+  const navigate=useNavigate()
     const plans = [
         {
             name: "Weekly Pass",
@@ -29,6 +33,11 @@ function PricingSection() {
             icon: <CalendarTodayIcon />
         }
     ];
+
+
+   const handlePricing=()=>{
+       navigate("payement")
+    }
 
     return (
         <div style={{ display: 'flex', justifyContent: 'center', padding: '20px', gap: '20px' }}>
@@ -54,7 +63,7 @@ function PricingSection() {
                                 </ListItem>
                             ))}
                         </List>
-                        <Button fullWidth variant="outlined" color="primary">
+                        <Button fullWidth variant="outlined" color="primary" onClick={handlePricing}>
                             Choose {plan.name.split(' ')[0]}
                         </Button>
                     </CardContent>

@@ -15,6 +15,10 @@ export default function Navbar() {
         function navigateAboutUs(){
             navigate('/about-us')
             }
+
+            function navigateHow(){
+                navigate('/how-it-works')
+                }
             function navigateHelp(){
                 navigate('/help')
                 }
@@ -26,7 +30,7 @@ export default function Navbar() {
                 </div>
                 <nav>
                     <ul className="flex items-center space-x-4">
-                        <li><a href="#" className="text-gray-600 hover:text-gray-800 transition duration-200 ease-in-out">How it works</a></li>
+                        <li><a href="#" className="text-gray-600 hover:text-gray-800 transition duration-200 ease-in-out" onClick={navigateHow}>How it works</a></li>
                         <li><a href="#" className="text-gray-600 hover:text-gray-800 transition duration-200 ease-in-out" onClick={navigateAboutUs}>About Us</a></li>
                         <li><a href="#" className="text-gray-600 hover:text-gray-800 transition duration-200 ease-in-out" onClick={navigateContact}>Contact Us</a></li>
                         <li><a href="#" className="text-gray-600 hover:text-gray-800 transition duration-200 ease-in-out" onClick={navigateHelp}>Help</a></li>

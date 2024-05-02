@@ -19,6 +19,7 @@ import ContactForm from './components/ContactForm';
 import AboutUs from './components/AboutUs';
 import HelpSection from './components/HelpSection';
 import PricingSection from './components/PricingSection';
+import HowItWorksSection from './components/HowItWorksSection';
 
 function App() {
   const spots = [
@@ -55,6 +56,9 @@ function App() {
           <Route path="/contact" element={<ContactForm />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/help" element={<HelpSection />} />
+          <Route path="/how-it-works" element={<HowItWorksSection />} />
+
+
 
 
 
