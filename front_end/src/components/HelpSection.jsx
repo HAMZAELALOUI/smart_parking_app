@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import {
   Typography, Paper, Box, Accordion, AccordionSummary, AccordionDetails, List, ListItem,
   ListItemIcon, ListItemText, Divider, IconButton, Dialog, DialogContent,
-  TextField, Button, Badge, Avatar,
-  DialogTitle,
-  DialogActions
+  TextField, Button, Badge, Avatar, DialogTitle, DialogActions
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import EmailIcon from '@mui/icons-material/Email';
@@ -19,7 +18,6 @@ function HelpSection() {
     const [chatMessages, setChatMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
 
-    // Example FAQ data
     const faqs = [
         { question: "How do I reserve a parking spot?", answer: "You can reserve a parking spot by navigating to the 'Reserve' section in our app and selecting the spot you wish to reserve." },
         { question: "What are the payment options?", answer: "We accept various payment methods including credit cards, PayPal, and mobile payments." },
@@ -34,20 +32,12 @@ function HelpSection() {
         setOpenChat(false);
     };
 
-
-    const handleSendMessage = () => {
-        if (newMessage.trim()) {
-            const now = new Date();
-            const timestamp = `${now.getHours()}:${now.getMinutes().toString().padStart(2, '0')}`;
-            setChatMessages([...chatMessages, { text: newMessage, sender: 'You', time: timestamp }]);
-            setNewMessage('');
-        }
-
     const handleSendMessage = async () => {
-      //
-
+      //modified
     };
-
+    
+    
+    
     const handleNewMessageChange = (event) => {
         setNewMessage(event.target.value);
     };
@@ -149,6 +139,6 @@ function HelpSection() {
             </Dialog>
         </Box>
     );
-}}
+}
 
 export default HelpSection;
