@@ -14,7 +14,6 @@ import SendIcon from '@mui/icons-material/Send';
 
 function HelpSection() {
 
-    const api_key=''
     const [openChat, setOpenChat] = useState(false);
     const [chatMessages, setChatMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
@@ -34,39 +33,7 @@ function HelpSection() {
     };
 
     const handleSendMessage = async () => {
-        if (newMessage.trim()) {
-            const userMessage = {
-                text: newMessage,
-                sender: 'You',
-                time: new Date().toLocaleTimeString()
-            };
-            setChatMessages([...chatMessages, userMessage]);
-    
-            try {
-                const response = await axios.post('https://api.openai.com/v1/completions', {
-                    model: "gpt-3.5-turbo",  // Updated model name here
-                    prompt: newMessage,
-                    max_tokens: 150,
-                    temperature: 0.7  // Adds a bit of randomness to the responses
-                }, {
-                    headers: {
-                        'Authorization': `Bearer ${api_key}`,
-                        'Content-Type': 'application/json'
-                    }
-                });
-    
-                const botMessage = {
-                    text: response.data.choices[0].text.trim(),
-                    sender: 'Bot',
-                    time: new Date().toLocaleTimeString()
-                };
-                setChatMessages(prevMessages => [...prevMessages, botMessage]);
-            } catch (error) {
-                console.error('Failed to fetch response from OpenAI:', error);
-            }
-    
-            setNewMessage('');
-        }
+      
     };
     
     
