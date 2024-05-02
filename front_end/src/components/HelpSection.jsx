@@ -28,6 +28,8 @@ function HelpSection() {
         setOpenChat(true);
     };
 
+    const handleScripts=()=>{}
+
     const handleChatClose = () => {
         setOpenChat(false);
     };
