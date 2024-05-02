@@ -25,7 +25,9 @@ function HelpSection() {
     ];
 
     const handleChatOpen = () => {
+        
         setOpenChat(true);
+
     };
 
     const handleScripts=()=>{}
@@ -35,7 +37,7 @@ function HelpSection() {
     };
 
     const handleSendMessage = async () => {
-      //modified
+      const a=1
     };
     
     
