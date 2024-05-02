@@ -18,6 +18,7 @@ import UserProfile from './components/UserProfile';
 import ContactForm from './components/ContactForm';
 import AboutUs from './components/AboutUs';
 import HelpSection from './components/HelpSection';
+import PricingSection from './components/PricingSection';
 
 function App() {
   const spots = [
@@ -33,7 +34,9 @@ function App() {
             <>
               <HeroSection />
               <Testimonials />
+              <PricingSection />
               <Features />
+
             </>
           } />
           <Route path="/signup" element={<SignupForm />} />
@@ -52,6 +55,8 @@ function App() {
           <Route path="/contact" element={<ContactForm />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/help" element={<HelpSection />} />
+
+
 
 
 
