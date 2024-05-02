@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import {
   Typography, Paper, Box, Accordion, AccordionSummary, AccordionDetails, List, ListItem,
   ListItemIcon, ListItemText, Divider, IconButton, Dialog, DialogContent,
-  TextField, Button, Badge, Avatar,
-  DialogTitle,
-  DialogActions
+  TextField, Button, Badge, Avatar, DialogTitle, DialogActions
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import EmailIcon from '@mui/icons-material/Email';
@@ -14,11 +13,12 @@ import CloseIcon from '@mui/icons-material/Close';
 import SendIcon from '@mui/icons-material/Send';
 
 function HelpSection() {
+
+    const api_key='sk-proj-7I0zqz5m2kRnaqnn94fxT3BlbkFJhXApda9lnnNQh9qEKCoJ'
     const [openChat, setOpenChat] = useState(false);
     const [chatMessages, setChatMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
 
-    // Example FAQ data
     const faqs = [
         { question: "How do I reserve a parking spot?", answer: "You can reserve a parking spot by navigating to the 'Reserve' section in our app and selecting the spot you wish to reserve." },
         { question: "What are the payment options?", answer: "We accept various payment methods including credit cards, PayPal, and mobile payments." },
@@ -33,15 +33,44 @@ function HelpSection() {
         setOpenChat(false);
     };
 
-    const handleSendMessage = () => {
+    const handleSendMessage = async () => {
         if (newMessage.trim()) {
-            const now = new Date();
-            const timestamp = `${now.getHours()}:${now.getMinutes().toString().padStart(2, '0')}`;
-            setChatMessages([...chatMessages, { text: newMessage, sender: 'You', time: timestamp }]);
+            const userMessage = {
+                text: newMessage,
+                sender: 'You',
+                time: new Date().toLocaleTimeString()
+            };
+            setChatMessages([...chatMessages, userMessage]);
+    
+            try {
+                const response = await axios.post('https://api.openai.com/v1/completions', {
+                    model: "gpt-3.5-turbo",  // Updated model name here
+                    prompt: newMessage,
+                    max_tokens: 150,
+                    temperature: 0.7  // Adds a bit of randomness to the responses
+                }, {
+                    headers: {
+                        'Authorization': `Bearer ${api_key}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+    
+                const botMessage = {
+                    text: response.data.choices[0].text.trim(),
+                    sender: 'Bot',
+                    time: new Date().toLocaleTimeString()
+                };
+                setChatMessages(prevMessages => [...prevMessages, botMessage]);
+            } catch (error) {
+                console.error('Failed to fetch response from OpenAI:', error);
+            }
+    
             setNewMessage('');
         }
     };
-
+    
+    
+    
     const handleNewMessageChange = (event) => {
         setNewMessage(event.target.value);
     };
