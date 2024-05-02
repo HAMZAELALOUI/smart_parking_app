@@ -14,7 +14,7 @@ import SendIcon from '@mui/icons-material/Send';
 
 function HelpSection() {
 
-    const api_key='sk-proj-7I0zqz5m2kRnaqnn94fxT3BlbkFJhXApda9lnnNQh9qEKCoJ'
+    const api_key=''
     const [openChat, setOpenChat] = useState(false);
     const [chatMessages, setChatMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
