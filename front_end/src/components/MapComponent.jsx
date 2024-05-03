@@ -13,7 +13,15 @@ L.Icon.Default.mergeOptions({
 });
 
 const apiKey = '40fcbde3fd7c42faae8b8e189eb10ce9'; // Your API key
-const initialCenter = [33.7490, -84.3880]; // Default center: Atlanta
+const initialCenter = [ 33.5335, -7.5816]; //EMSI Casablanca Parking
+
+const parkingLocations = [
+  { name: "EMSI Casablanca Parking", lat: 33.5335, lng: -7.5816 },
+  { name: "EMSI Rabat Parking", lat: 34.0209, lng: -6.8416 },
+  { name: "EMSI Marrakech Parking", lat: 31.6295, lng: -7.9811 },
+];
+
+
 
 const MapComponent = () => {
   const [location, setLocation] = useState('');
@@ -54,7 +62,7 @@ const MapComponent = () => {
       clearTimeout(debounceTimer.current);  // Clear the timer on new input
       debounceTimer.current = setTimeout(() => {
         fetchLocation(inputLocation);
-      }, 1000);  // Set a new timer
+      }, 4000);  // Set a new timer
     }
   };
 
@@ -154,15 +162,24 @@ const MapComponent = () => {
         </form>
         {message && <p style={{ color: '#28a745', marginTop: '10px' }}>{message}</p>}
       </div>
-      <div style={{ width: '70%', zIndex: 10, height: '100%' ,marginTop:'50px'}}>
-      <MapContainer center={mapCenter} zoom={13} style={{ height: '100%', width: '100%' }} whenCreated={mapInstance => { mapRef.current = mapInstance; }}>
+      <div style={{ width: '70%', zIndex: 10, height: '92%' ,marginTop:'50px' }}>
+      <MapContainer
+          center={mapCenter}
+          zoom={7}
+          style={{ height: "100%", width: "100%" }}
+          whenCreated={(mapInstance) => {
+            mapRef.current = mapInstance;
+          }}
+        >
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           />
-          <Marker position={mapCenter}>
-            <Popup>A pretty CSS3 popup. <br /> Easily customizable.</Popup>
-          </Marker>
+          {parkingLocations.map((park) => (
+            <Marker key={park.name} position={[park.lat, park.lng]}>
+              <Popup>{park.name}</Popup>
+            </Marker>
+          ))}
         </MapContainer>
       </div>
     </div>
