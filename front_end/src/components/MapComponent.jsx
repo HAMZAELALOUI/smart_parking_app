@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
+import axios from 'axios';
 
 // Setup to avoid icon missing issues in Leaflet
 delete L.Icon.Default.prototype._getIconUrl;
@@ -11,7 +12,8 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
 });
 
-const center = [33.7490, -84.3880]; // Coordinates for Atlanta
+const apiKey = '40fcbde3fd7c42faae8b8e189eb10ce9'; // Your API key
+const initialCenter = [33.7490, -84.3880]; // Default center: Atlanta
 
 const MapComponent = () => {
   const [location, setLocation] = useState('');
@@ -19,11 +21,60 @@ const MapComponent = () => {
   const [time, setTime] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState('');
+  const [locationError, setLocationError] = useState('');
+  const [mapCenter, setMapCenter] = useState(initialCenter);
+  const mapRef = useRef();
+  const debounceTimer = useRef(null); // Correctly define debounceTimer
+
+  const fetchLocation = async (query) => {
+    const url = `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(query)}&key=${apiKey}`;
+    try {
+      const response = await axios.get(url);
+      if (response.data && response.data.results.length > 0) {
+        const { lat, lng } = response.data.results[0].geometry;
+        setLocation(response.data.results[0].formatted);
+        const newWaypoint = L.latLng(lat, lng);
+        setMapCenter(newWaypoint);
+        if (mapRef.current) {
+          mapRef.current.flyTo(newWaypoint, 13);
+        }
+      } else {
+        setLocationError('Location not found');
+      }
+    } catch (error) {
+      setLocationError('Unable to retrieve the location');
+      console.error(error);
+    }
+  };
+
+  const handleLocationInput = (e) => {
+    const inputLocation = e.target.value;
+    setLocation(inputLocation);
+    if (inputLocation.length > 3) {
+      clearTimeout(debounceTimer.current);  // Clear the timer on new input
+      debounceTimer.current = setTimeout(() => {
+        fetchLocation(inputLocation);
+      }, 1000);  // Set a new timer
+    }
+  };
+
+  const handleLocationDetect = () => {
+    if (!navigator.geolocation) {
+      setLocationError('Geolocation is not supported by your browser');
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(async (position) => {
+      const { latitude, longitude } = position.coords;
+      fetchLocation(`${latitude}+${longitude}`);
+    }, () => {
+      setLocationError('Unable to retrieve your location');
+    });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);
-    // Simulate a search or booking operation
     setTimeout(() => {
       setIsLoading(false);
       setMessage('Search completed successfully!');
@@ -37,7 +88,7 @@ const MapComponent = () => {
         padding: '20px',
         backgroundColor: '#f8f9fa',
         overflowY: 'auto',
-        borderRight: '2px solid #dee2e6'  // Added a border for clarity
+        borderRight: '2px solid #dee2e6'
       }}>
         <h2 style={{ color: '#495057' }}>Book Parking Near</h2>
         <form style={{ margin: '20px 0' }} onSubmit={handleSubmit}>
@@ -47,8 +98,9 @@ const MapComponent = () => {
               id="location"
               type="text"
               value={location}
-              onChange={e => setLocation(e.target.value)}
-              placeholder="Enter a location"
+              onChange={handleLocationInput}
+              onFocus={handleLocationDetect}
+              placeholder="Enter a location or click to detect"
               style={{
                 width: '100%',
                 padding: '10px',
@@ -57,6 +109,7 @@ const MapComponent = () => {
               }}
             />
           </div>
+          {locationError && <p style={{ color: 'red' }}>{locationError}</p>}
           <div style={{ marginBottom: '10px' }}>
             <label htmlFor="date" style={{ display: 'block', marginBottom: '5px' }}>Date</label>
             <input
@@ -101,16 +154,15 @@ const MapComponent = () => {
         </form>
         {message && <p style={{ color: '#28a745', marginTop: '10px' }}>{message}</p>}
       </div>
-      <div style={{ width: '70%' ,zIndex:10,height:'91%'}}>
-        <MapContainer center={center} zoom={13} style={{ height: '100%', width: '100%',marginTop: '60px' }}>
+      <div style={{ width: '70%', zIndex: 10, height: '100%' ,marginTop:'50px'}}>
+      <MapContainer center={mapCenter} zoom={13} style={{ height: '100%', width: '100%' }} whenCreated={mapInstance => { mapRef.current = mapInstance; }}>
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           />
-          <Marker position={center}>
+          <Marker position={mapCenter}>
             <Popup>A pretty CSS3 popup. <br /> Easily customizable.</Popup>
           </Marker>
-          {/* Additional markers and components */}
         </MapContainer>
       </div>
     </div>
