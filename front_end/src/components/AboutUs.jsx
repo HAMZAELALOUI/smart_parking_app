@@ -19,7 +19,7 @@ function AboutUs() {
   return (
     <Box sx={{ overflow: 'hidden', px: 3, py: 5, bgcolor: 'background.default',mt:8 }}>
       <Typography variant="h2" gutterBottom component="h1" color="text.primary">
-        We're JustPark, Your Smart Parking Solution
+        We're EmsiPark, Your Smart Parking Solution
       </Typography>
       <Typography sx={{ mb: 4, fontSize: '1.25rem', color: 'text.secondary' }}>
         Trusted for nearly two decades, we make parking quicker, cheaper, and smarter.
