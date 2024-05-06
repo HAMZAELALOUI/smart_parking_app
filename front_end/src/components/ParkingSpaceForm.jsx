@@ -19,12 +19,13 @@ function ParkingSpaceForm() {
 
 
     return (
-        <div className="max-w-7xl mx-auto my-12 bg-white shadow-xl rounded-xl overflow-hidden">
+        <div className="max-w-7xl mx-auto my-12 bg-white shadow-xl rounded-xl overflow-hidden mt-20">
             <div className="flex">
                 {/* Image container with more visual prominence */}
-                <div className="w-3/5 bg-cover bg-center" style={{ backgroundImage: `url(/assets/carpark.jpg)` }}>
-                    {/* Optionally add a gradient or overlay here */}
-                </div>
+                <div className="w-3/5 bg-cover bg-center" style={{ backgroundImage: `url(/assets/car-type.webp)` }}>
+    {/* Optionally add a gradient or overlay here */}
+</div>
+
 
                 {/* Form container with adjusted padding and more focus on form elements */}
                 <div className="w-2/5 p-12">
@@ -38,8 +39,10 @@ function ParkingSpaceForm() {
                                 className="w-full px-4 py-3 border border-gray-300 rounded-md"
                             >
                                 <option value="">Select car type</option>
-                                <option value="car_park">Car</option>
-                                <option value="garage">Bike</option>
+                                <option value="car_park">small Car</option>
+                                <option value="medium">Medium</option>
+                                <option value="big">Big Car</option>
+
                                 {/* Add other space types as needed */}
                             </select>
                         </div>

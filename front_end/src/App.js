@@ -49,7 +49,6 @@ function App() {
           {/* <Route path="/parking-spots" element={<ParkingSpots />} /> */}
           <Route path="/parking-spots-display" element={<ParkingSpotsDisplay />} />
           <Route path="/reservation-details" element={<ReservationDetails />} />
-          <Route path="/reservation-details" element={<ReservationDetails />} />
           <Route path="/payement" element={<PaymentMethods />} />
           <Route path="/map" element={<MapComponent spots={spots} />} />
           <Route path="/user-profile" element={<UserProfile />} />

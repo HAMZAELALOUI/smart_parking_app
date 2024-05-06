@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import carIcon from './img/road.png';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import axios from 'axios';
@@ -11,6 +12,14 @@ L.Icon.Default.mergeOptions({
   iconUrl: require('leaflet/dist/images/marker-icon.png'),
   shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
 });
+
+const redIcon = new L.Icon({
+  iconUrl: carIcon,
+  iconSize: [50, 50], // Adjust the size of the icon as needed
+  iconAnchor: [16, 32], // Adjust the anchor point if needed
+  popupAnchor: [0, -32], // Adjust the popup anchor if needed
+});
+
 
 const apiKey = '40fcbde3fd7c42faae8b8e189eb10ce9'; // Your API key
 const initialCenter = [ 33.5335, -7.5816]; //EMSI Casablanca Parking
@@ -27,6 +36,8 @@ const MapComponent = () => {
   const [location, setLocation] = useState('');
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
+  const [searchedCoords, setSearchedCoords] = useState(null); // To store the coordinates of the fetched location
+
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState('');
   const [locationError, setLocationError] = useState('');
@@ -41,11 +52,7 @@ const MapComponent = () => {
       if (response.data && response.data.results.length > 0) {
         const { lat, lng } = response.data.results[0].geometry;
         setLocation(response.data.results[0].formatted);
-        const newWaypoint = L.latLng(lat, lng);
-        setMapCenter(newWaypoint);
-        if (mapRef.current) {
-          mapRef.current.flyTo(newWaypoint, 13);
-        }
+        setSearchedCoords([lat, lng]); // Store the coordinates
       } else {
         setLocationError('Location not found');
       }
@@ -180,6 +187,12 @@ const MapComponent = () => {
               <Popup>{park.name}</Popup>
             </Marker>
           ))}
+          {searchedCoords && (
+  <Marker position={searchedCoords} icon={redIcon}>
+    <Popup>{location}</Popup>
+  </Marker>
+)}
+
         </MapContainer>
       </div>
     </div>

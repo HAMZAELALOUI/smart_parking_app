@@ -62,8 +62,7 @@ function ReservationDetails() {
                     <input
                         type="text"
                         name="makeModel"
-                        value={vehicleDetails.makeModel}
-                        onChange={handleInputChange}
+                        // value={}
                         placeholder="Enter Your Name"
                         className="w-full p-2 border border-gray-300 rounded-md"
                         required
@@ -74,8 +73,8 @@ function ReservationDetails() {
                     <input
                         type="tel"
                         name="makeModel"
-                        value={vehicleDetails.makeModel}
-                        onChange={handleInputChange}
+                        // value={vehicleDetails.makeModel}
+                        // onChange={handleInputChange}
                         placeholder="Enter Your Postal Code"
                         className="w-full p-2 border border-gray-300 rounded-md"
                         required

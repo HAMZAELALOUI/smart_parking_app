@@ -2,11 +2,11 @@ import React from 'react';
 
 function Footer() {
   return (
-    <footer className=" text-white bg-blue-950">
+    <footer className=" text-white bg-gray-700">
       <div className="container mx-auto px-4 py-10 grid grid-cols-4 gap-8">
         {/* Trustpilot and Social Media Section */}
         <div>
-          <h4 className="font-bold">JustPark</h4>
+          <h4 className="font-bold text-xl text-green-600 hover:text-green-800">EmsiPark</h4>
           <div className="flex items-center space-x-2 my-2">
             <img src="/path_to_trustpilot_icon.svg" alt="Trustpilot" />
             <span>TrustScore 4.5 113,041 reviews</span>
@@ -54,10 +54,10 @@ function Footer() {
         <div className="col-span-4 mt-10">
           <hr className="border-gray-700" />
           <p className="text-gray-400 text-sm mt-2">
-            JustPark is the trading name of JustPark Parking Limited Registered in England and Wales No. 05967777 Dunn's Hat Factory, 106 - 110 Kentish Town Road, London, NW1 9PX, UK
+            EmsiPark is the trading name of EmsiPark Parking Limited Registered in Moroocco No. 05967777 Dunn's Hat Factory, 106 - 110 Kentish Town Road,   Marrakech, NW1 9PX, UK
           </p>
           <p className="text-gray-400 text-sm mt-1">
-            © Copyright JustPark 2024
+            © Copyright EmsiPark 2024
           </p>
         </div>
       </div>
