@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import carIcon from './img/road.png';
 import 'leaflet/dist/leaflet.css';
+import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
+
 import L from 'leaflet';
 import axios from 'axios';
 
@@ -20,7 +22,7 @@ const redIcon = new L.Icon({
   popupAnchor: [0, -32], // Adjust the popup anchor if needed
 });
 
-
+const mapTilerUrl = `https://api.maptiler.com/maps/streets-v2/256/{z}/{x}/{y}.png?key=4yZsih8hRnRRvWHqnDuw`; 
 const apiKey = '40fcbde3fd7c42faae8b8e189eb10ce9'; // Your API key
 const initialCenter = [ 33.5335, -7.5816]; //EMSI Casablanca Parking
 
@@ -45,6 +47,10 @@ const MapComponent = () => {
   const mapRef = useRef();
   const debounceTimer = useRef(null); // Correctly define debounceTimer
 
+
+  
+  
+
   const fetchLocation = async (query) => {
     const url = `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(query)}&key=${apiKey}`;
     try {
@@ -53,8 +59,6 @@ const MapComponent = () => {
         const { lat, lng } = response.data.results[0].geometry;
         setLocation(response.data.results[0].formatted);
         setSearchedCoords([lat, lng]); // Store the coordinates
-      } else {
-        setLocationError('Location not found');
       }
     } catch (error) {
       setLocationError('Unable to retrieve the location');
@@ -78,10 +82,12 @@ const MapComponent = () => {
       setLocationError('Geolocation is not supported by your browser');
       return;
     }
-
+  
     navigator.geolocation.getCurrentPosition(async (position) => {
       const { latitude, longitude } = position.coords;
-      fetchLocation(`${latitude}+${longitude}`);
+      setSearchedCoords([latitude, longitude]); // Directly set searched coordinates
+      const query = `${latitude}+${longitude}`;
+      fetchLocation(query); // Optionally keep fetching to update the location description
     }, () => {
       setLocationError('Unable to retrieve your location');
     });
@@ -171,29 +177,43 @@ const MapComponent = () => {
       </div>
       <div style={{ width: '70%', zIndex: 10, height: '92%' ,marginTop:'50px' }}>
       <MapContainer
-          center={mapCenter}
-          zoom={7}
-          style={{ height: "100%", width: "100%" }}
-          whenCreated={(mapInstance) => {
-            mapRef.current = mapInstance;
-          }}
-        >
-          <TileLayer
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          />
-          {parkingLocations.map((park) => (
-            <Marker key={park.name} position={[park.lat, park.lng]}>
-              <Popup>{park.name}</Popup>
-            </Marker>
-          ))}
-          {searchedCoords && (
-  <Marker position={searchedCoords} icon={redIcon}>
-    <Popup>{location}</Popup>
-  </Marker>
-)}
+    center={mapCenter}
+    zoom={7}
+    style={{ height: "100%", width: "100%" }}
+    whenCreated={(mapInstance) => {
+      mapRef.current = mapInstance;
+      if (searchedCoords) {
+        L.Routing.control({
+          waypoints: [
+            L.latLng(searchedCoords[0], searchedCoords[1]),
+            L.latLng(31.6295, -7.9811) // EMSI Marrakech Parking coordinates
+          ],
+          routeWhileDragging: true,
+          show: false, // Set to true if you want to show the route by default
+          lineOptions: {
+            styles: [{ color: 'red', opacity: 1, weight: 5 }]
+          },
+          addWaypoints: false
+        }).addTo(mapRef.current);
+      }
+    }}
+  >
+    <TileLayer
+      url={mapTilerUrl}
+      attribution='© <a href="https://www.maptiler.com/">MapTiler</a> © <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+    />
+    {parkingLocations.map((park) => (
+      <Marker key={park.name} position={[park.lat, park.lng]}>
+        <Popup>{park.name}</Popup>
+      </Marker>
+    ))}
+    {searchedCoords && (
+      <Marker position={searchedCoords} icon={redIcon}>
+        <Popup>{location}</Popup>
+      </Marker>
+    )}
+</MapContainer>
 
-        </MapContainer>
       </div>
     </div>
   );

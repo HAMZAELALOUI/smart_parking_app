@@ -12,7 +12,7 @@
     <time>
         <begin value="0.0"/>
         <step-length value=".25"/>
-        <!-- <end value="3600.0"/> -->
+        <end value="3600.0"/>
     </time>
 
 </configuration>
