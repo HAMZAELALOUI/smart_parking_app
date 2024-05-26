@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- generated on 2024-05-18 12:32:36 by Eclipse SUMO GUI Version 1.19.0
+<!-- generated on 2024-05-18 20:30:26 by Eclipse SUMO GUI Version 1.19.0
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/sumoConfiguration.xsd">
 
     <input>
@@ -14,13 +14,13 @@
     </output>
 
     <time>
-        <begin value="0.0"/>
-        <end value="3600.0"/>
+        <begin value="0"/>
+        <end value="10000"/>
         <step-length value=".25"/>
     </time>
 
     <traci_server>
-        <remote-port value="50664"/>
+        <remote-port value="58272"/>
     </traci_server>
 
 </configuration>
@@ -28,6 +28,4 @@
 
 <tripinfos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/tripinfo_file.xsd">
     <tripinfo id="car1" depart="0.00" departLane="0a_0" departPos="4.60" departSpeed="0.00" departDelay="0.00" arrival="55.00" arrivalLane="1b_0" arrivalPos="33.22" arrivalSpeed="7.94" duration="55.00" routeLength="202.53" waitingTime="4.25" waitingCount="1" stopTime="24.25" timeLoss="5.19" rerouteNo="1" devices="tripinfo_car1 routing_car1" vType="reroutingType" speedFactor="0.98" vaporized="traci"/>
-    <tripinfo id="carX" depart="25.00" departLane="0a_0" departPos="4.60" departSpeed="0.00" departDelay="0.00" arrival="73.25" arrivalLane="8_0" arrivalPos="60.00" arrivalSpeed="7.94" duration="48.25" routeLength="364.68" waitingTime="0.00" waitingCount="0" stopTime="0.00" timeLoss="2.56" rerouteNo="1" devices="tripinfo_carX routing_carX" vType="reroutingType" speedFactor="1.06" vaporized=""/>
-    <tripinfo id="car3" depart="0.00" departLane="1b_0" departPos="4.60" departSpeed="0.00" departDelay="0.00" arrival="86.00" arrivalLane="0b_0" arrivalPos="100.00" arrivalSpeed="7.86" duration="86.00" routeLength="169.31" waitingTime="0.00" waitingCount="0" stopTime="60.00" timeLoss="4.70" rerouteNo="0" devices="tripinfo_car3 routing_car3" vType="reroutingType" speedFactor="1.20" vaporized=""/>
 </tripinfos>

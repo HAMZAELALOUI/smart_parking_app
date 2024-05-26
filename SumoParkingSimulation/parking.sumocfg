@@ -10,9 +10,13 @@
 
 	
     <time>
-        <begin value="0.0"/>
+     <begin value="0"/>
         <step-length value=".25"/>
-        <end value="3600.0"/>
+
+        <end value="10000"/>
     </time>
+       <traci_server>
+        <remote-port value="55185"/>
+    </traci_server>
 
 </configuration>
