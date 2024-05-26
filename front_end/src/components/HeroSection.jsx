@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
-import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import { useNavigate } from 'react-router-dom';
 
 function HeroSection() {
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(new Date());
    const navigate =useNavigate();
    const handleSubmit=()=>{
       navigate('/login')
@@ -24,7 +21,7 @@ function HeroSection() {
                 </div>
                 <div className="max-w-md mx-auto flex flex-col items-center gap-4">
                     <input type="text" placeholder="You want to park at?" className="form-input px-4 py-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-green-500" />
-                    <div className="flex gap-4 w-full">
+                    {/* <div className="flex gap-4 w-full">
                         <DatePicker 
                             selected={startDate} 
                             onChange={date => setStartDate(date)} 
@@ -45,7 +42,7 @@ function HeroSection() {
                             dateFormat="MMMM d, yyyy h:mm aa"
                             className="form-input px-4 py-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-green-500"
                         />
-                    </div>
+                    </div> */}
                     <button onClick={handleSubmit} className="bg-green-500 text-white px-6 py-2 rounded-md w-full">Show parking spaces</button>
                 </div>
             </div>

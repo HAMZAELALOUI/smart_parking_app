@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import DatePicker from 'react-datepicker';
+
 
 
 function ReservationDetails() {
   const navigate = useNavigate();
+  const [endDate, setEndDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(new Date());
+
 
     const [vehicleDetails, setVehicleDetails] = useState({
         makeModel: '',
@@ -57,25 +62,38 @@ function ReservationDetails() {
         <div className="max-w-4xl mx-auto my-10 bg-white shadow-md rounded-lg p-8">
             <h2 className="text-2xl font-semibold text-center mb-6">Reservation Details</h2>
             <form onSubmit={handleSubmit}>
+
+                   <div className="flex gap-4 mb-4">
+                        <DatePicker 
+                            selected={startDate} 
+                            onChange={date => setStartDate(date)} 
+                            showTimeSelect 
+                            timeFormat="HH:mm"
+                            timeIntervals={15}
+                            timeCaption="time"
+                            dateFormat="MMMM d, yyyy h:mm aa"
+                            className="form-input px-4 py-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-green-500"
+                       / >
+                        <DatePicker
+                            selected={endDate} 
+                            onChange={date => setEndDate(date)} 
+                            showTimeSelect 
+                            timeFormat="HH:mm"
+                            timeIntervals={15}
+                            timeCaption="time"
+                            dateFormat="MMMM d, yyyy h:mm aa"
+                            className="form-input px-4 py-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-green-500"
+                        />
+                    </div>
+    
                 <div className="mb-4">
-                    <label className="block text-sm font-medium mb-1">Name</label>
-                    <input
-                        type="text"
-                        name="makeModel"
-                        // value={}
-                        placeholder="Enter Your Name"
-                        className="w-full p-2 border border-gray-300 rounded-md"
-                        required
-                    />
-                </div>
-                <div className="mb-4">
-                    <label className="block text-sm font-medium mb-1">Postal Code</label>
+                    <label className="block text-sm font-medium mb-1">Matricule</label>
                     <input
                         type="tel"
                         name="makeModel"
                         // value={vehicleDetails.makeModel}
                         // onChange={handleInputChange}
-                        placeholder="Enter Your Postal Code"
+                        placeholder="Matricule"
                         className="w-full p-2 border border-gray-300 rounded-md"
                         required
                     />
