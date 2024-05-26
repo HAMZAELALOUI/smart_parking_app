@@ -32,7 +32,6 @@ function HelpSection() {
     };
 
     const handleSendMessage = async () => {
-        // Code to send message here
     };
     
     const handleNewMessageChange = (event) => {
