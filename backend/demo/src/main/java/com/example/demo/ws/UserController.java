@@ -1,17 +1,15 @@
 package com.example.demo.ws;
 
-
 import com.example.demo.bean.User;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/users")// Update this to match your front-end origin
+@RequestMapping("/api/users")
 public class UserController {
 
     @Autowired
@@ -21,10 +19,12 @@ public class UserController {
     public User createUser(@RequestBody User user) {
         return userService.createUser(user);
     }
+
     @PostMapping("/login")
-    public boolean authenticateUser(@RequestParam String email, @RequestParam String password) {
-        return userService.authenticate(email, password);
+    public boolean authenticateUser(@RequestBody LoginRequest loginRequest) {
+        return userService.authenticate(loginRequest.getEmail(), loginRequest.getPassword());
     }
+
     @GetMapping
     public List<User> getAllUsers() {
         return userService.getAllUsers();
@@ -39,6 +39,14 @@ public class UserController {
     public void deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
     }
+
+    @PutMapping("/{id}")
+    public User updateUser(@PathVariable Long id, @RequestBody User user) {
+        return userService.updateUser(id, user);
+    }
+
+    @GetMapping("/email/{email}")
+    public Optional<User> getUserByEmail(@PathVariable String email) {
+        return userService.findUserByEmail(email);
+    }
 }
-
-
