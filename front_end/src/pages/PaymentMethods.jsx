@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import Modal from './Modal';
-import CreditCardForm from './CreditCardForm';
-import PayPalForm from './PayPalForm';
-import BankTransferForm from './BankTransferForm';
+import Modal from '../components/sections/Modal';
+import CreditCardForm from '../components/forms/CreditCardForm';
+import PayPalForm from '../components/forms/PayPalForm';
+import BankTransferForm from '../components/forms/BankTransferForm';
 import { FaCreditCard, FaPaypal, FaUniversity } from 'react-icons/fa';  // Import appropriate icons
 
 function PaymentMethods() {

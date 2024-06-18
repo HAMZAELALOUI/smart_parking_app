@@ -1,8 +1,9 @@
 import React from 'react';
 import { Box, Typography, Grid, Paper, Button, useMediaQuery } from '@mui/material';
 import { styled, useTheme } from '@mui/material/styles';
-import Timeline from './CustomTimeline'; // Assuming a custom timeline component
-import TestimonialSlider from './TestimonialSlider'; // Assuming a custom testimonial slider component
+import TestimonialSlider from '../components/sections/TestimonialSlider';
+import { Timeline } from '@mui/icons-material';
+
 
 const Item = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(6),

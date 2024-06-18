@@ -1,25 +1,25 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import HeroSection from './components/HeroSection';
-import Testimonials from './components/Testimonials';
-import Features from './components/Features';
-import Footer from './components/Footer';
-import SignupForm from './components/SignupForm';
-import LoginForm from './components/LoginForm';
-import ParkingSpaceForm from './components/ParkingSpaceForm';
-import BusinessSolutions from './components/BusinessSolutions';
-import ParkingSpots from './components/ParkingSpots';
-import ParkingSpotsDisplay from './components/ParkingSpotsDisplay';
-import ReservationDetails from './components/ReservationDetails';
-import PaymentMethods from './components/PaymentMethods';
-import MapComponent from './components/MapComponent';
-import UserProfile from './components/UserProfile';
-import ContactForm from './components/ContactForm';
-import AboutUs from './components/AboutUs';
-import HelpSection from './components/HelpSection';
-import PricingSection from './components/PricingSection';
-import HowItWorksSection from './components/HowItWorksSection';
+import HeroSection from './components/sections/HeroSection';
+import Testimonials from './components/sections/Testimonials';
+import Features from './components/sections/Features';
+import SignupForm from './components/forms/SignupForm';
+import LoginForm from './components/forms/LoginForm';
+import ParkingSpaceForm from './components/forms/ParkingSpaceForm';
+import BusinessSolutions from './components/sections/BusinessSolutions';
+import ParkingSpotsDisplay from './pages/ParkingSpotsDisplay';
+import ReservationDetails from './components/forms/ReservationDetails';
+import PaymentMethods from './pages/PaymentMethods';
+import MapComponent from './pages/MapComponent';
+import UserProfile from './components/forms/UserProfile';
+import ContactForm from './components/forms/ContactForm';
+
+import HelpSection from './pages/HelpSection';
+import PricingSection from './components/sections/PricingSection';
+import Navbar from './components/layout/Navbar';
+import Footer from './components/layout/Footer';
+import HowItWorksSection from './components/sections/HowItWorksSection';
+import AboutUs from './pages/AboutUs';
 
 function App() {
   const spots = [

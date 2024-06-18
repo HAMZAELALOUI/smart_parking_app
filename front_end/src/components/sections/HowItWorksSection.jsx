@@ -16,8 +16,9 @@ import {
   Grid
 } from '@mui/material';
 import { CheckCircle, Map, Payment, DirectionsCar } from '@mui/icons-material';
-import CustomHowtimeline from './CustomHowtimeline';
 import HowItWorksCarousel from './HowItWorksCarousel';
+import CustomHowtimeline from '../timelines/CustomHowtimeline';
+
 
 const steps = [
   {

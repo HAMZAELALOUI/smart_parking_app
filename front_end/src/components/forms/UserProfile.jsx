@@ -4,7 +4,7 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import DeleteIcon from '@mui/icons-material/Delete';
-import DashboardUser from './DashboardUser';
+import DashboardUser from '../../pages/DashboardUser';
 import { Person } from '@mui/icons-material';
 
 function UserProfile() {
