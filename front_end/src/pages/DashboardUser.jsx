@@ -1,6 +1,6 @@
 import React from 'react';
 import { Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton, Collapse, Box } from '@mui/material';
-import CollapsibleRow from '../components/common/CollapsibleRow';
+import CollapsibleRow from '../components/common/dashboard-user-common/CollapsibleRow';
 
 function createData(name, date, price, details) {
   return {
