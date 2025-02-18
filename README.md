@@ -38,5 +38,5 @@ To run this project locally:
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/your-username/smart-parking-system.git
-   cd smart-parking-system
+   git clone git@github.com:HAMZAELALOUI/smart_parking_app.git
+   cd smart_parking_app
